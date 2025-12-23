@@ -144,8 +144,32 @@
       background-color: #795548;
       color: white;
     }
-    .tag.announcement {
+    .tag.model {
+      background-color: #3f51b5;
+      color: white;
+    }
+    .tag.agent {
+      background-color: #009688;
+      color: white;
+    }
+    .tag.tool {
       background-color: #607d8b;
+      color: white;
+    }
+    .tag.robot {
+      background-color: #795548;
+      color: white;
+    }
+    .tag.research {
+      background-color: #673ab7;
+      color: white;
+    }
+    .tag.benchmark {
+      background-color: #ff5722;
+      color: white;
+    }
+    .tag.partnership {
+      background-color: #263238;
       color: white;
     }
 
@@ -219,7 +243,7 @@
   </div>
   <div class="filter-group">
     <div class="toggle-container">
-      <button class="toggle-button active" data-filter="all">All Models</button>
+      <button class="toggle-button active" data-filter="all">All Entries</button>
       <button class="toggle-button" data-filter="open-source">Open Weights</button>
       <button class="toggle-button" data-filter="api-only">API Only</button>
     </div>
@@ -234,13 +258,18 @@
       <select id="typeFilter" onchange="filterByType(this.value)">
         <option value="all">All Types</option>
         <option value="model">Models</option>
-        <option value="announcement">Announcements</option>
+        <option value="agent">Agents</option>
+        <option value="tool">Tools</option>
+        <option value="robot">Robots</option>
+        <option value="research">Research</option>
+        <option value="benchmark">Benchmarks</option>
+        <option value="partnership">Partnerships</option>
       </select>
     </div>
   </div>
   <div class="counter-container">
     <span class="counter-item">
-      <span id="open-source-count">0</span> Open Source
+      <span id="open-source-count">0</span> Open Weights
     </span>
     <span class="counter-divider">·</span>
     <span class="counter-item">
@@ -251,48 +280,691 @@
     <div class="month">
       <h3>January 2025</h3>
       <div class="event">
-        <h4>OpenBMB PRIME</h4>
-        <p>o1 like Eurus 2 7B (<a href="https://huggingface.co/PRIME-RL/Eurus-2-7B-PRIME" target="_blank">open weights</a>).</p>
+        <h4>OpenAI Operator</h4>
+        <p>Experimental browsing agent for Pro subscribers.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag agent">Agent</span>
+      </div>
+      <div class="event">
+        <h4>Gemini Flash Thinking 0121</h4>
+        <p>Reasoning-tuned Gemini Flash variant that topped Arena Chatbots.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>DeepSeek R1</h4>
+        <p>Open reasoning LLM with o1-like performance (<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1" target="_blank">open weights</a>).</p>
         <span class="tag open-source">Open Weights</span>
         <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
       </div>
       <div class="event">
-        <h4>Nvidia Cosmos</h4>
-        <p>Diffusion + Autoregressive World Models (<a href="https://huggingface.co/collections/nvidia/cosmos-6751e884dc10e013a0a0d8e6" target="_blank">open weights</a>).</p>
+        <h4>DeepSeek R1-Zero</h4>
+        <p>Open R1-Zero reasoning model trained without RLHF (<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Zero" target="_blank">open weights</a>).</p>
         <span class="tag open-source">Open Weights</span>
-        <span class="tag multimodal">Multimodal</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
       </div>
       <div class="event">
-        <h4>Moondream2</h4>
-        <p>Moondream2 w/ Gaze Detection (<a href="https://huggingface.co/vikhyatk/moondream2" target="_blank">open weights</a>).</p>
+        <h4>Titans Architecture</h4>
+        <p>Research paper on long- and short-term memory for LLMs.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag research">Research</span>
+      </div>
+      <div class="event">
+        <h4>Janus Pro 7B</h4>
+        <p>Multimodal model for text and image generation (<a href="https://huggingface.co/deepseek-ai/Janus-Pro-7B" target="_blank">open weights</a>).</p>
         <span class="tag open-source">Open Weights</span>
         <span class="tag multimodal">Multimodal</span>
-      </div>      
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen2.5-Max</h4>
+        <p>Large LLM outperforming several leading closed models.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen2.5-1M Series</h4>
+        <p>Open long-context LLMs up to 1M tokens (<a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-1M" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen2.5-VL Series</h4>
+        <p>Open vision-language models in multiple sizes (<a href="https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>o3 mini</h4>
+        <p>Fast reasoning model with three reasoning levels.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
     </div>
     <div class="month">
       <h3>February 2025</h3>
       <div class="event">
-        <h4>Meta's LLama 65</h4>
-        <p>Open source audio generation model</p>
-        <span class="tag open-source">Open Weights</span>
-        <span class="tag audio">Audio</span>
+        <h4>Grok 3 Family</h4>
+        <p>Grok 3, Grok 3 Reasoning, and Grok 3 mini with Think/Big Brain modes.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
       </div>
       <div class="event">
-        <h4>Google Gemini Ultra</h4>
-        <p>Next generation multimodal model</p>
+        <h4>Claude 3.7 Family</h4>
+        <p>Claude 3.7 and 3.7 Thinking with extended reasoning mode.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>OpenAI Deep Research</h4>
+        <p>Autonomous research tool with live web search and reports.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag tool">Tool</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.0 Flash Family</h4>
+        <p>Gemini 2.0 Flash, Flash-Lite Preview, and Pro Experimental releases.</p>
         <span class="tag api-only">API Only</span>
         <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>QwQ-Max</h4>
+        <p>Reasoning model based on Qwen2.5-Max.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Phi-4 Mini</h4>
+        <p>Lightweight 3.8B Phi-4 model for efficient reasoning (<a href="https://huggingface.co/microsoft/Phi-4-mini-instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Phi-4 Multimodal</h4>
+        <p>5.6B Phi-4 model with vision-language support (<a href="https://huggingface.co/microsoft/Phi-4-multimodal-instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>GPT-4.5</h4>
+        <p>Higher-accuracy GPT model with reduced hallucinations.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
       </div>
     </div>
     <div class="month">
       <h3>March 2025</h3>
       <div class="event">
-        <h4>OpenAI ImageGen V5</h4>
-        <p>Open source image generation</p>
+        <h4>Gemini 2.5 Pro (Experimental)</h4>
+        <p>Thinking model with 1M context and top benchmark results.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemma 3 Series</h4>
+        <p>Open multimodal models with 128K context and video/image understanding (<a href="https://huggingface.co/google/gemma-3-27b-it" target="_blank">open weights</a>).</p>
         <span class="tag open-source">Open Weights</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>GPT-4o Image Generation</h4>
+        <p>High-fidelity text-to-image generation with strong text rendering.</p>
+        <span class="tag api-only">API Only</span>
         <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.0 Flash Experimental (Image)</h4>
+        <p>Experimental Gemini Flash image generation and editing.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>QwQ-32B</h4>
+        <p>Open 32B reasoning model with strong math and coding (<a href="https://huggingface.co/Qwen/QwQ-32B" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen2.5-VL 32B</h4>
+        <p>Open 32B vision-language model for visual reasoning and agents (<a href="https://huggingface.co/Qwen/Qwen2.5-VL-32B-Instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>DeepSeek-V3-0324</h4>
+        <p>Updated MoE base model with stronger reasoning and coding (<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3-0324" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Sesame CSM</h4>
+        <p>Conversational Speech Model for real-time, expressive voice.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag audio">Audio</span>
+        <span class="tag model">Model</span>
       </div>
     </div>
+    <div class="month">
+      <h3>April 2025</h3>
+      <div class="event">
+        <h4>Llama 4</h4>
+        <p>Open Llama 4 family with a 10M context window (<a href="https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.5 Flash</h4>
+        <p>Flash model with adjustable reasoning depth.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Nova Act</h4>
+        <p>Framework for building multi-step autonomous agents.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag tool">Tool</span>
+      </div>
+      <div class="event">
+        <h4>GPT-4.1</h4>
+        <p>GPT-4.1 family with 1M token context windows.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>o3 Full + o4 Mini</h4>
+        <p>Advanced reasoning models for math and coding.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Midjourney v7</h4>
+        <p>Image generation upgrade with higher quality and control.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Veo 2.0</h4>
+        <p>Google video model update with improved realism and speed.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Runway Gen-4</h4>
+        <p>Runway video model update for faster, higher-quality generation.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Vidu Q1</h4>
+        <p>Vidu video model update with improved style and quality.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Kling 2.0</h4>
+        <p>Kling video model update with better quality and responsiveness.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen 3 Series</h4>
+        <p>Open-source Qwen 3 family with strong size-to-quality performance (<a href="https://huggingface.co/Qwen/Qwen3-0.6B" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>May 2025</h3>
+      <div class="event">
+        <h4>Phi-4 Reasoning Series</h4>
+        <p>Open Phi-4 reasoning models optimized for small, high-quality LLMs (<a href="https://huggingface.co/microsoft/Phi-4-reasoning" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Suno 4.5</h4>
+        <p>Music model update with cleaner decay and less shimmer.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag audio">Audio</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Claude 4 Family</h4>
+        <p>Claude 4 Opus and Sonnet 4 with deep thinking and better coding.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Veo 3</h4>
+        <p>Video generation with synchronized 4K video and audio.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Imagen 4</h4>
+        <p>Image model with stronger contextual understanding and style.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>OpenAI Codex Agent</h4>
+        <p>Autonomous coding agent in ChatGPT powered by o3.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag agent">Agent</span>
+      </div>
+      <div class="event">
+        <h4>Google Jules</h4>
+        <p>Asynchronous coding agent on Gemini 2.5 Pro.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag agent">Agent</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.5 Pro Deep Think</h4>
+        <p>Deep Think mode for enhanced reasoning and planning.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.5 Flash</h4>
+        <p>High-throughput Gemini model with native audio support.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Operator (o3 Upgrade)</h4>
+        <p>Operator upgraded to o3 for stronger browser automation.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag agent">Agent</span>
+      </div>
+      <div class="event">
+        <h4>DeepSeek R1-0528</h4>
+        <p>Open code-and-inference model near o4-mini performance (<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-0528" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>AlphaEvolve</h4>
+        <p>Autonomous code optimizer using evolutionary strategies.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag tool">Tool</span>
+      </div>
+      <div class="event">
+        <h4>Gemini Diffusion</h4>
+        <p>Experimental text diffusion model for fast, controllable generation.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemma 3n</h4>
+        <p>On-device open model with audio, text, and vision inputs (<a href="https://huggingface.co/google/gemma-3n-E4B-it" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>June 2025</h3>
+      <div class="event">
+        <h4>Gemini 2.5 Pro (Final)</h4>
+        <p>Production Gemini 2.5 Pro leading benchmarks.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Eleven v3 (Alpha)</h4>
+        <p>TTS model with fine-grained emotion control and 70+ languages.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag audio">Audio</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>o3 Pro</h4>
+        <p>Enhanced reasoning model with extended context and tools.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>July 2025</h3>
+      <div class="event">
+        <h4>Grok 4</h4>
+        <p>New SOTA on ARC-AGI v2 and Humanity's Last Exam.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>ChatGPT Agent</h4>
+        <p>Agentic mode with autonomous coding, research, and tool use.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag agent">Agent</span>
+      </div>
+      <div class="event">
+        <h4>OpenAI IMO Gold Model</h4>
+        <p>Experimental model wins IMO gold without external tools.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag benchmark">Benchmark</span>
+      </div>
+      <div class="event">
+        <h4>Gemini Deep Think (IMO Gold)</h4>
+        <p>Gemini Deep Think earns IMO gold with parallel reasoning.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag benchmark">Benchmark</span>
+      </div>
+      <div class="event">
+        <h4>Qwen3-235B-A22B Instruct</h4>
+        <p>Open instruction-tuned Qwen3 MoE for general LLM use (<a href="https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen3-Coder</h4>
+        <p>Open Qwen3 coding model family (<a href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Kimi K2</h4>
+        <p>Open Chinese LLM with strong research-oriented performance (<a href="https://huggingface.co/moonshotai/Kimi-K2-Instruct" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>GLM-4.5</h4>
+        <p>Open agentic model family for intelligent applications (<a href="https://huggingface.co/zai-org/GLM-4.5-Air" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>August 2025</h3>
+      <div class="event">
+        <h4>Gemini 2.5 Deep Think</h4>
+        <p>Extended thinking mode for complex problem solving.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Claude Opus 4.1</h4>
+        <p>Opus 4.1 upgrade for stronger agentic coding.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Genie 3.0</h4>
+        <p>World model for interactive 3D environments from text.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>gpt-oss-120b</h4>
+        <p>Open-source reasoning model optimized for accessible hardware (<a href="https://huggingface.co/openai/gpt-oss-120b" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>gpt-oss-20b</h4>
+        <p>Smaller open-source reasoning model for local use (<a href="https://huggingface.co/openai/gpt-oss-20b" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>GPT-5</h4>
+        <p>Next-gen model with stronger coding and dynamic thinking.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>DeepSeek V3.1</h4>
+        <p>Hybrid fast/slow thinking model for agentic tasks (<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.1" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.5 Flash Image</h4>
+        <p>Precise image editing with character consistency (nano-banana).</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>September 2025</h3>
+      <div class="event">
+        <h4>Seedream 4.0</h4>
+        <p>Next-gen image model for text-to-image and editing.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 2.5 Deep Think (ICPC)</h4>
+        <p>Variant achieves gold-level performance at ICPC World Finals.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag benchmark">Benchmark</span>
+      </div>
+      <div class="event">
+        <h4>OpenAI ICPC Perfect Score</h4>
+        <p>Reasoning and code model hits 12/12 in ICPC testing.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag benchmark">Benchmark</span>
+      </div>
+      <div class="event">
+        <h4>Suno v5</h4>
+        <p>Music model with studio-grade fidelity and natural vocals.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag audio">Audio</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Qwen-3-Max</h4>
+        <p>Trillion-parameter flagship focused on long context and agents.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Wan 2.5</h4>
+        <p>Video model with multi-shot consistency and character animation.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Claude Sonnet 4.5</h4>
+        <p>Coding-optimized Sonnet update with improved reasoning.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Sora 2</h4>
+        <p>Video and audio generation with improved physics.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>DeepSeek-V3.2-Exp</h4>
+        <p>Experimental DeepSeek V3.2 model (<a href="https://huggingface.co/deepseek-ai/DeepSeek-V3.2-Exp" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>OpenAI + NVIDIA Partnership</h4>
+        <p>Strategic deal for 10 GW of AI systems for OpenAI.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag partnership">Partnership</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>October 2025</h3>
+      <div class="event">
+        <h4>Figure 03</h4>
+        <p>Humanoid robot for domestic and general-purpose tasks.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag robot">Robot</span>
+      </div>
+      <div class="event">
+        <h4>Gemini Computer Control</h4>
+        <p>Model for GUI automation with SOTA performance.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Claude 4.5 Haiku</h4>
+        <p>Fast, low-latency Claude model for high-volume use.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>ChatGPT Atlas</h4>
+        <p>AI-native browser with built-in Agent Mode.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag tool">Tool</span>
+      </div>
+      <div class="event">
+        <h4>1X Neo</h4>
+        <p>Consumer-ready humanoid robot for home use.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag robot">Robot</span>
+      </div>
+    </div>
+    <div class="month">
+      <h3>November 2025</h3>
+      <div class="event">
+        <h4>Kimi K2 Thinking</h4>
+        <p>Open reasoning model setting new benchmark records (<a href="https://huggingface.co/moonshotai/Kimi-K2-Thinking" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>GPT 5.1</h4>
+        <p>Thinking and Instant modes with expanded context.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Grok 4.1</h4>
+        <p>Top LM Arena performance with high EQ and logic.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Gemini 3.0</h4>
+        <p>Flagship thinking model leading major benchmarks.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag multimodal">Multimodal</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>GPT 5.1 Codex Max</h4>
+        <p>Agentic coding model for long-term tasks.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Nano Banana Pro</h4>
+        <p>Gemini 3-based image generation and editing model.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Claude Opus 4.5</h4>
+        <p>High-end coding and agentic model at lower price.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>FLUX 2</h4>
+        <p>Open-weight image generation model (<a href="https://huggingface.co/black-forest-labs/FLUX.2-dev" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag vision">Vision</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>DeepSeekMath-V2</h4>
+        <p>Open math model with olympiad-level performance (<a href="https://huggingface.co/deepseek-ai/DeepSeek-Math-V2" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Fara-7B</h4>
+        <p>Open small model optimized for browser agents (<a href="https://huggingface.co/microsoft/Fara-7B" target="_blank">open weights</a>).</p>
+        <span class="tag open-source">Open Weights</span>
+        <span class="tag text">Text</span>
+        <span class="tag model">Model</span>
+      </div>
+      <div class="event">
+        <h4>Poetiq ARC-AGI-2 Result</h4>
+        <p>ARC-AGI-2 score above 60%, surpassing human average.</p>
+        <span class="tag api-only">API Only</span>
+        <span class="tag benchmark">Benchmark</span>
+      </div>
+    </div>
+  </div>
   </div>
   <script>
     function updateCounts() {
@@ -342,9 +1014,7 @@
         const matchesModality = currentFilters.modality === 'all' || 
           event.querySelector(`.tag.${currentFilters.modality}`);
         const matchesType = currentFilters.type === 'all' || 
-          (currentFilters.type === 'announcement' ? 
-            event.querySelector('.tag.announcement') : 
-            !event.querySelector('.tag.announcement'));
+          event.querySelector(`.tag.${currentFilters.type}`);
 
         event.style.display = (matchesCategory && matchesModality && matchesType) ? 'block' : 'none';
       });

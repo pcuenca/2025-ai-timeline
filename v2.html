@@ -244,7 +244,7 @@
       border-radius: 16px;
       background: color-mix(in srgb, var(--bg2) 72%, transparent);
       padding: 12px;
-      cursor: pointer;
+      cursor: default;
     }
     .card:focus{ outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
     .card .row{
@@ -266,7 +266,7 @@
       color: var(--muted);
     }
 
-    .links{ margin-top: 10px; display:none; gap:10px; flex-wrap:wrap; }
+    .links{ margin-top: 8px; display:flex; gap:10px; flex-wrap:wrap; }
     .links a{
       font-size: 12px;
       padding: 6px 10px;
@@ -275,8 +275,6 @@
       background: color-mix(in srgb, var(--bg2) 70%, transparent);
       color: var(--text);
     }
-    .card[aria-expanded="true"] .links{ display:flex; }
-
     /* sticky bottom filters (mobile-first) */
     .filterbar{
       position: fixed;
@@ -694,9 +692,6 @@
         const card = document.createElement("div");
         card.className = "card";
         card.id = e.id;
-        card.tabIndex = 0;
-        card.setAttribute("aria-expanded","false");
-
         const badge = e.access==="open"
           ? `<span class="badge open">Open weights</span>`
           : e.access==="api"
@@ -728,16 +723,6 @@
           <div class="meta-chips">${dateLabel}${metas}</div>
           <div class="links">${links.join("")}</div>
         `;
-
-        const toggle = () => {
-          const open = card.getAttribute("aria-expanded")==="true";
-          card.setAttribute("aria-expanded", open ? "false" : "true");
-        };
-
-        card.addEventListener("click", toggle);
-        card.addEventListener("keydown", (ev)=>{
-          if (ev.key==="Enter" || ev.key===" "){ ev.preventDefault(); toggle(); }
-        });
 
         cards.appendChild(card);
       }

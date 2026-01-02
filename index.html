@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -183,30 +183,9 @@
       border-bottom: 1px solid #eee;
     }
 
-    .toggle-container {
-      display: flex;
-      gap: 8px;
-    }
-
     .dropdown-filters {
       display: flex;
       gap: 8px;
-    }
-
-    .toggle-button {
-      padding: 6px 12px;
-      border: 1px solid #ddd;
-      border-radius: 15px;
-      background-color: white;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .toggle-button.active {
-      background-color: #2196f3;
-      border-color: #2196f3;
-      color: white;
     }
 
     select {
@@ -242,23 +221,23 @@
     <a href="#" target="_blank">View on GitHub</a>
   </div>
   <div class="filter-group">
-    <div class="toggle-container">
-      <button class="toggle-button active" data-filter="all">All Entries</button>
-      <button class="toggle-button" data-filter="open-source">Open Weights</button>
-      <button class="toggle-button" data-filter="api-only">API Only</button>
-    </div>
     <div class="dropdown-filters">
+      <select id="categoryFilter" onchange="filterByCategory(this.value)">
+        <option value="all">All Releases</option>
+        <option value="model">Models</option>
+        <option value="other">Ecosystem</option>
+      </select>
+      <select id="accessFilter" onchange="filterByAccess(this.value)">
+        <option value="all">All Access</option>
+        <option value="open-source">Open Weights</option>
+        <option value="api-only">API Only</option>
+      </select>
       <select id="modalityFilter" onchange="filterByModality(this.value)">
         <option value="all">All Modalities</option>
         <option value="text">Text</option>
         <option value="audio">Audio</option>
         <option value="vision">Vision</option>
         <option value="multimodal">Multimodal</option>
-      </select>
-      <select id="typeFilter" onchange="filterByType(this.value)">
-        <option value="all">All Releases</option>
-        <option value="model">Models</option>
-        <option value="other">Ecosystem</option>
       </select>
     </div>
   </div>
@@ -281,7 +260,7 @@
       <div class="event">
         <h4>OpenAI Operator</h4>
         <p>Experimental browsing agent for Pro subscribers.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag agent">Agent</span>
       </div>
       <div class="event">
@@ -358,7 +337,7 @@
       <div class="event">
         <h4>OpenAI Deep Research</h4>
         <p>Autonomous research tool with live web search and reports.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag tool">Tool</span>
       </div>
       <div class="event">
@@ -475,7 +454,7 @@
       <div class="event">
         <h4>Nova Act</h4>
         <p>Framework for building multi-step autonomous agents.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag tool">Tool</span>
       </div>
       <div class="event">
@@ -575,13 +554,13 @@
       <div class="event">
         <h4>OpenAI Codex Agent</h4>
         <p>Autonomous coding agent in ChatGPT powered by o3.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag agent">Agent</span>
       </div>
       <div class="event">
         <h4>Google Jules</h4>
         <p>Asynchronous coding agent on Gemini 2.5 Pro.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag agent">Agent</span>
       </div>
       <div class="event">
@@ -601,7 +580,7 @@
       <div class="event">
         <h4>Operator (o3 Upgrade)</h4>
         <p>Operator upgraded to o3 for stronger browser automation.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag agent">Agent</span>
       </div>
       <div class="event">
@@ -614,7 +593,7 @@
       <div class="event">
         <h4>AlphaEvolve</h4>
         <p>Autonomous code optimizer using evolutionary strategies.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag tool">Tool</span>
       </div>
       <div class="event">
@@ -668,19 +647,19 @@
       <div class="event">
         <h4>ChatGPT Agent</h4>
         <p>Agentic mode with autonomous coding, research, and tool use.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag agent">Agent</span>
       </div>
       <div class="event">
         <h4>OpenAI IMO Gold Model</h4>
         <p>Experimental model wins IMO gold without external tools.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag benchmark">Benchmark</span>
       </div>
       <div class="event">
         <h4>Gemini Deep Think (IMO Gold)</h4>
         <p>Gemini Deep Think earns IMO gold with parallel reasoning.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag benchmark">Benchmark</span>
       </div>
       <div class="event">
@@ -783,13 +762,13 @@
       <div class="event">
         <h4>Gemini 2.5 Deep Think (ICPC)</h4>
         <p>Variant achieves gold-level performance at ICPC World Finals.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag benchmark">Benchmark</span>
       </div>
       <div class="event">
         <h4>OpenAI ICPC Perfect Score</h4>
         <p>Reasoning and code model hits 12/12 in ICPC testing.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag benchmark">Benchmark</span>
       </div>
       <div class="event">
@@ -837,7 +816,7 @@
       <div class="event">
         <h4>OpenAI + NVIDIA Partnership</h4>
         <p>Strategic deal for 10 GW of AI systems for OpenAI.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag partnership">Partnership</span>
       </div>
     </div>
@@ -846,7 +825,7 @@
       <div class="event">
         <h4>Figure 03</h4>
         <p>Humanoid robot for domestic and general-purpose tasks.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag robot">Robot</span>
       </div>
       <div class="event">
@@ -866,13 +845,13 @@
       <div class="event">
         <h4>ChatGPT Atlas</h4>
         <p>AI-native browser with built-in Agent Mode.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag tool">Tool</span>
       </div>
       <div class="event">
         <h4>1X Neo</h4>
         <p>Consumer-ready humanoid robot for home use.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag robot">Robot</span>
       </div>
     </div>
@@ -951,7 +930,7 @@
       <div class="event">
         <h4>Poetiq ARC-AGI-2 Result</h4>
         <p>ARC-AGI-2 score above 60%, surpassing human average.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag benchmark">Benchmark</span>
       </div>
     </div>
@@ -1009,7 +988,7 @@
       <div class="event">
         <h4>Google Deep Research</h4>
         <p>Autonomous agent for multi-step synthesis and research.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag agent">Agent</span>
       </div>
       <div class="event">
@@ -1036,7 +1015,7 @@
       <div class="event">
         <h4>Grok Voice Agent API</h4>
         <p>Real-time bidirectional audio streaming for developers.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag audio">Audio</span>
         <span class="tag agent">Agent</span>
       </div>
@@ -1071,7 +1050,7 @@
       <div class="event">
         <h4>Poetiq ARC-2 Breakthrough</h4>
         <p>Specialized system reportedly solves ARC-2 with GPT-5.2.</p>
-        <span class="tag api-only">API Only</span>
+        
         <span class="tag benchmark">Benchmark</span>
       </div>
     </div>
@@ -1079,9 +1058,16 @@
   </div>
   <script>
     function updateCounts() {
-      const openSourceCount = document.querySelectorAll('.event .tag.open-source').length;
-      const apiOnlyCount = document.querySelectorAll('.event .tag.api-only').length;
-      const ecosystemCount = Array.from(document.querySelectorAll('.event')).filter(event =>
+      const visibleEvents = Array.from(document.querySelectorAll('.event')).filter(event =>
+        event.style.display !== 'none'
+      );
+      const openSourceCount = visibleEvents.filter(event =>
+        event.querySelector('.tag.open-source')
+      ).length;
+      const apiOnlyCount = visibleEvents.filter(event =>
+        event.querySelector('.tag.api-only')
+      ).length;
+      const ecosystemCount = visibleEvents.filter(event =>
         !event.querySelector('.tag.model')
       ).length;
       
@@ -1091,32 +1077,34 @@
     }
 
     let currentFilters = {
-      category: 'all',
+      access: 'all',
       modality: 'all',
-      type: 'all'
+      category: 'all'
     };
+
+    function filterByAccess(access) {
+      currentFilters.access = access;
+      applyFilters();
+    }
 
     function filterByModality(modality) {
       currentFilters.modality = modality;
       applyFilters();
     }
 
-    function filterByType(type) {
-      currentFilters.type = type;
-      applyFilters();
-    }
-
-    function filterEvents(category) {
-      // Update button states
-      const buttons = document.querySelectorAll('.toggle-button');
-      buttons.forEach(button => {
-        button.classList.remove('active');
-        if (button.getAttribute('data-filter') === category) {
-          button.classList.add('active');
-        }
-      });
-
+    function filterByCategory(category) {
       currentFilters.category = category;
+      const accessFilter = document.getElementById('accessFilter');
+      const modalityFilter = document.getElementById('modalityFilter');
+      const disableExtras = category === 'other';
+      accessFilter.disabled = disableExtras;
+      modalityFilter.disabled = disableExtras;
+      if (disableExtras) {
+        accessFilter.value = 'all';
+        modalityFilter.value = 'all';
+        currentFilters.access = 'all';
+        currentFilters.modality = 'all';
+      }
       applyFilters();
     }
 
@@ -1124,16 +1112,16 @@
       const events = document.querySelectorAll('.event');
       
       events.forEach(event => {
-        const matchesCategory = currentFilters.category === 'all' || 
-          event.querySelector(`.tag.${currentFilters.category}`);
+        const matchesAccess = currentFilters.access === 'all' || 
+          event.querySelector(`.tag.${currentFilters.access}`);
         const matchesModality = currentFilters.modality === 'all' || 
           event.querySelector(`.tag.${currentFilters.modality}`);
-        const matchesType = currentFilters.type === 'all' || 
-          (currentFilters.type === 'model'
+        const matchesCategory = currentFilters.category === 'all' || 
+          (currentFilters.category === 'model'
             ? event.querySelector('.tag.model')
             : !event.querySelector('.tag.model'));
 
-        event.style.display = (matchesCategory && matchesModality && matchesType) ? 'block' : 'none';
+        event.style.display = (matchesAccess && matchesModality && matchesCategory) ? 'block' : 'none';
       });
 
       // Check for empty months and hide them
@@ -1148,14 +1136,8 @@
       updateCounts();
     }
 
-    // Update event listeners when the page loads
     document.addEventListener('DOMContentLoaded', function() {
-      const buttons = document.querySelectorAll('.toggle-button');
-      buttons.forEach(button => {
-        button.addEventListener('click', function() {
-          filterEvents(this.getAttribute('data-filter'));
-        });
-      });
+      filterByCategory(document.getElementById('categoryFilter').value);
       updateCounts();
     });
   </script>

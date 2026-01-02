@@ -96,18 +96,18 @@
     .event p a:hover {
       text-decoration: underline;
     }
-    .github-link {
+    .credits-bar {
       text-align: center;
       padding: 8px;
       background-color: #24292e;
       color: white;
       font-size: 14px;
     }
-    .github-link a {
+    .credits-bar a {
       color: white;
       text-decoration: none;
     }
-    .github-link a:hover {
+    .credits-bar a:hover {
       text-decoration: underline;
     }
     /* Scrollbar styles */
@@ -178,7 +178,7 @@
       flex-direction: column;
       align-items: center;
       gap: 15px;
-      padding: 20px 0;
+      padding: 20px 16px;
       background-color: white;
       border-bottom: 1px solid #eee;
     }
@@ -204,55 +204,90 @@
       color: #666;
       background-color: #f8f9fa;
     }
-
-    .counter-item span {
-      font-weight: bold;
-      color: #2196f3;
+    .counter-inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #666;
+      margin-left: auto;
+    }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      flex-wrap: wrap;
     }
 
+    .counter-item {
+      color: #666;
+      font-size: 13px;
+    }
+    .counter-item .count-open {
+      color: #4caf50;
+    }
+    .counter-item .count-api {
+      color: #f44336;
+    }
+    .counter-item .count-eco {
+      color: #607d8b;
+    }
+    .counter-item .label-open {
+      color: #4caf50;
+    }
+    .counter-item .label-api {
+      color: #f44336;
+    }
+    .counter-item .label-eco {
+      color: #607d8b;
+    }
     .counter-divider {
-      margin: 0 10px;
+      margin: 0 8px;
       color: #ddd;
     }
   </style>
 </head>
 <body>
-  <div class="github-link">
-    <a href="#" target="_blank">View on GitHub</a>
+  <div class="credits-bar">
+    Data from <a href="https://nhlocal.github.io/AiTimeline">NHLOCAL</a> · Original concept, recipe and code by <a href="https://x.com/reach_vb">vb</a>
   </div>
   <div class="filter-group">
-    <div class="dropdown-filters">
-      <select id="categoryFilter" onchange="filterByCategory(this.value)">
-        <option value="all">All Releases</option>
-        <option value="model">Models</option>
-        <option value="other">Ecosystem</option>
-      </select>
-      <select id="accessFilter" onchange="filterByAccess(this.value)">
-        <option value="all">All Access</option>
-        <option value="open-source">Open Weights</option>
-        <option value="api-only">API Only</option>
-      </select>
-      <select id="modalityFilter" onchange="filterByModality(this.value)">
-        <option value="all">All Modalities</option>
-        <option value="text">Text</option>
-        <option value="audio">Audio</option>
-        <option value="vision">Vision</option>
-        <option value="multimodal">Multimodal</option>
-      </select>
+    <div class="filter-row">
+      <div class="dropdown-filters">
+        <select id="categoryFilter" onchange="filterByCategory(this.value)">
+          <option value="all">All Releases</option>
+          <option value="model">Models</option>
+          <option value="other">Ecosystem</option>
+        </select>
+        <select id="accessFilter" onchange="filterByAccess(this.value)">
+          <option value="all">All Access</option>
+          <option value="open-source">Open Weights</option>
+          <option value="api-only">API Only</option>
+        </select>
+        <select id="modalityFilter" onchange="filterByModality(this.value)">
+          <option value="all">All Modalities</option>
+          <option value="text">Text</option>
+          <option value="audio">Audio</option>
+          <option value="vision">Vision</option>
+          <option value="multimodal">Multimodal</option>
+        </select>
+      </div>
+      <div class="counter-inline">
+        <span class="counter-item">
+          <span id="open-source-count" class="count-open">0</span> <span class="label-open">open</span>
+        </span>
+        <span class="counter-divider">·</span>
+        <span class="counter-item">
+          <span id="api-only-count" class="count-api">0</span> <span class="label-api">api</span>
+        </span>
+        <span class="counter-divider">·</span>
+        <span class="counter-item">
+          <span id="ecosystem-count" class="count-eco">0</span> <span class="label-eco">ecosystem</span>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="counter-container">
-    <span class="counter-item">
-      <span id="open-source-count">0</span> Open Weights
-    </span>
-    <span class="counter-divider">·</span>
-    <span class="counter-item">
-      <span id="api-only-count">0</span> API Only
-    </span>
-    <span class="counter-divider">·</span>
-    <span class="counter-item">
-      <span id="ecosystem-count">0</span> Ecosystem
-    </span>
   </div>
   <div class="timeline">
     <div class="month">

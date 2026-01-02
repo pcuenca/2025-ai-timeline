@@ -282,6 +282,10 @@
       background: color-mix(in srgb, var(--bg2) 70%, transparent);
       color: var(--text);
     }
+    .links a.link-open{
+      color: var(--open);
+      border-color: color-mix(in srgb, var(--open) 35%, var(--border));
+    }
     .meta-sep{
       color: var(--muted);
       font-size: 12px;
@@ -705,7 +709,7 @@
         card.className = "card";
         card.id = e.id;
         const badge = e.access==="open"
-          ? `<span class="badge open">Open weights</span>`
+          ? (e.links?.hf ? `<a class="badge open" href="${e.links.hf}" target="_blank" rel="noopener">Open weights</a>` : `<span class="badge open">Open weights</span>`)
           : e.access==="api"
             ? `<span class="badge api">API</span>`
             : `<span class="badge">Unknown</span>`;
@@ -718,7 +722,7 @@
         const links = [];
         const hf = e.links?.hf;
         const other = e.links?.other || [];
-        if (hf) links.push(`<a href="${hf}" target="_blank" rel="noopener">Hugging Face</a>`);
+        if (hf) links.push(`<a class="link-open" href="${hf}" target="_blank" rel="noopener">Hugging Face</a>`);
         for (const u of other.slice(0, 3)) {
           links.push(`<a href="${u}" target="_blank" rel="noopener">Link</a>`);
         }

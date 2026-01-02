@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Model Releases — 2025</title>
+  <style>
+    /* ---------- Theme tokens ---------- */
+    :root{
+      --radius:16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --max: 980px;
+    }
+
+    /* Light (default) */
+    html[data-theme="light"]{
+      --bg:#f6f7fb;
+      --bg2:#ffffff;
+      --panel:rgba(255,255,255,.78);
+      --panel2:#ffffff;
+      --text:#0b1220;
+      --muted:#516173;
+      --border:rgba(10,18,32,.12);
+      --chip:rgba(10,18,32,.06);
+      --chip2:rgba(10,18,32,.10);
+      --accent:#0ea5e9;
+      --open:#059669;
+      --api:#e11d48;
+      --link:#0b67c2;
+      --headerbg: rgba(246,247,251,.92);
+    }
+
+    /* Dark */
+    html[data-theme="dark"]{
+      --bg:#0b0d10;
+      --bg2:#0b0d10;
+      --panel:rgba(18,22,28,.70);
+      --panel2:#12161c;
+      --text:#e8eef7;
+      --muted:#9fb0c2;
+      --border:rgba(255,255,255,.10);
+      --chip:rgba(255,255,255,.08);
+      --chip2:rgba(255,255,255,.12);
+      --accent:#7dd3fc;
+      --open:#34d399;
+      --api:#fb7185;
+      --link:#93c5fd;
+      --headerbg: rgba(11,13,16,.92);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, color-mix(in srgb, var(--open) 12%, transparent), transparent 50%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    a{ color: var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 18px 16px 90px; }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(to bottom, var(--headerbg), color-mix(in srgb, var(--headerbg) 65%, transparent));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    header .wrap{ padding-bottom: 14px; }
+
+    .topline{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding-top: 10px;
+    }
+    h1{ margin:0; font-size: 20px; letter-spacing: .2px; }
+    .sub{ margin-top:6px; color:var(--muted); font-size: 13px; line-height:1.35; max-width: 62ch; }
+
+    .nav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    .nav a, .nav button{
+      font-size: 12px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--bg2) 70%, transparent);
+      color: var(--text);
+      cursor:pointer;
+    }
+
+    .panel{
+      background: linear-gradient(180deg,
+        color-mix(in srgb, var(--panel) 100%, transparent),
+        color-mix(in srgb, var(--panel2) 85%, transparent)
+      );
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel .hd{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .panel .bd{ padding: 14px; }
+
+    .section-title{
+      font-size: 13px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text);
+      user-select:none;
+      cursor: pointer;
+    }
+    .chip[aria-pressed="true"]{ background: var(--chip2); border-color: color-mix(in srgb, var(--border) 75%, var(--text)); }
+
+    .badge{
+      display:inline-flex;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 70%, transparent);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .badge.open{ color: var(--open); border-color: color-mix(in srgb, var(--open) 35%, var(--border)); }
+    .badge.api{ color: var(--api); border-color: color-mix(in srgb, var(--api) 35%, var(--border)); }
+
+    .grid{
+      display:grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    /* story */
+    .chapter{
+      padding: 12px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 68%, transparent);
+      border-radius: 14px;
+    }
+    .chapter h3{ margin:0 0 6px; font-size: 15px; }
+    .chapter p{ margin:0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .chapter .chips{ margin-top: 8px; }
+    .jump{
+      display:inline-flex;
+      margin-top: 10px;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 70%, transparent);
+      color: var(--text);
+    }
+
+    /* overview */
+    .monthstrip{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+    }
+    .monthpill{
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--bg2) 70%, transparent);
+      border: 1px solid var(--border);
+      min-width: 92px;
+      color: var(--text);
+    }
+    .monthpill .m{ font-size: 12px; color: var(--muted); }
+    .monthpill .c{ margin-top: 4px; font-size: 12px; display:flex; gap:8px; }
+    .dot{ display:inline-flex; align-items:center; gap:6px; color: var(--text); }
+    .dot::before{
+      content:"";
+      width: 8px; height: 8px; border-radius: 999px;
+      background: color-mix(in srgb, var(--muted) 35%, transparent);
+      display:inline-block;
+    }
+    .dot.open::before{ background: var(--open); }
+    .dot.api::before{ background: var(--api); }
+
+    /* explore timeline */
+    .month{ margin-top: 18px; scroll-margin-top: 130px; }
+    .month-header{
+      position: sticky;
+      top: 92px;
+      z-index: 10;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--bg2) 85%, transparent);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .month-header .left{ display:flex; flex-direction:column; gap:3px; }
+    .month-header .title{ font-size: 14px; }
+    .month-header .meta{ font-size: 12px; color: var(--muted); }
+
+    .cards{ margin-top: 10px; display:grid; gap: 10px; }
+    .card{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--bg2) 72%, transparent);
+      padding: 12px;
+      cursor: pointer;
+    }
+    .card:focus{ outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
+    .card .row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .card h4{ margin:0; font-size: 14px; line-height:1.25; }
+    .card .desc{ margin-top:6px; color: var(--muted); font-size: 13px; line-height: 1.35; }
+
+    .meta-chips{ margin-top: 10px; display:flex; flex-wrap:wrap; gap:6px; }
+    .mini{
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--chip) 90%, transparent);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .links{ margin-top: 10px; display:none; gap:10px; flex-wrap:wrap; }
+    .links a{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 70%, transparent);
+      color: var(--text);
+    }
+    .card[aria-expanded="true"] .links{ display:flex; }
+
+    /* sticky bottom filters (mobile-first) */
+    .filterbar{
+      position: fixed;
+      left:0; right:0; bottom:0;
+      z-index: 60;
+      padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+      background: color-mix(in srgb, var(--bg2) 92%, transparent);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .filterbar .inner{
+      max-width: var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .count{
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.2;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 12px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 75%, transparent);
+      color: var(--text);
+      cursor:pointer;
+    }
+
+    /* filter sheet */
+    .sheet{
+      position: fixed;
+      inset:0;
+      display:none;
+      z-index: 100;
+      background: rgba(0,0,0,.28);
+    }
+    html[data-theme="dark"] .sheet{ background: rgba(0,0,0,.55); }
+    .sheet[aria-hidden="false"]{ display:block; }
+    .sheet .panel{
+      position:absolute;
+      left: 10px; right: 10px;
+      bottom: 10px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .row2{ display:flex; gap:8px; flex-wrap:wrap; }
+    input[type="search"]{
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 85%, transparent);
+      color: var(--text);
+      font-size: 14px;
+    }
+    label{ font-size: 12px; color: var(--muted); display:block; margin: 10px 0 6px; }
+
+    .error{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      background: color-mix(in srgb, var(--bg2) 78%, transparent);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    @media (min-width: 860px){
+      h1{ font-size: 24px; }
+      .grid{ grid-template-columns: 1fr 1fr; }
+      .month-header{ top: 86px; }
+      .sheet .panel{ bottom: 14px; }
+      .filterbar{ padding: 10px 16px; }
+      .filterbar .inner{ padding: 0 16px; }
+    }
+
+    @media print{
+      header, .filterbar, .sheet, #themeToggle { display:none !important; }
+      body{ background:#fff !important; color:#000 !important; }
+      .panel, .card, .month-header{ box-shadow:none !important; background:#fff !important; color:#000 !important; }
+      .desc, .meta, .mini, .sub, .count{ color:#333 !important; }
+      a{ text-decoration: underline !important; color:#000 !important; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <div class="topline">
+      <div>
+        <h1>AI Model Releases — 2025</h1>
+        <div class="sub">
+          A curated + explorable timeline of major model releases (and optional ecosystem events).
+          Tap any card to expand. Filters update the overview and timeline.
+        </div>
+      </div>
+      <nav class="nav" aria-label="Sections">
+        <a href="#story">Story</a>
+        <a href="#overview">Overview</a>
+        <a href="#explore">Explore</a>
+        <button id="themeToggle" type="button" aria-label="Toggle theme">☀︎ / ☾</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="story" class="panel">
+    <div class="hd">
+      <div class="section-title">Story</div>
+      <div class="badge" id="storyNote">Curated highlights → jump into data</div>
+    </div>
+    <div class="bd">
+      <div class="grid" id="chapters"></div>
+      <div id="loadError" class="error" style="display:none"></div>
+    </div>
+  </section>
+
+  <div style="height:12px"></div>
+
+  <section id="overview" class="panel">
+    <div class="hd">
+      <div class="section-title">Overview</div>
+      <div class="badge" id="overviewStats">—</div>
+    </div>
+    <div class="bd">
+      <div class="monthstrip" id="monthstrip" aria-label="Jump to month"></div>
+    </div>
+  </section>
+
+  <div style="height:12px"></div>
+
+  <section id="explore" class="panel">
+    <div class="hd">
+      <div class="section-title">Explore</div>
+      <div class="badge" id="visibleStats">—</div>
+    </div>
+    <div class="bd" id="timeline"></div>
+  </section>
+</div>
+
+<!-- sticky mobile bar -->
+<div class="filterbar" role="region" aria-label="Filters summary">
+  <div class="inner">
+    <div class="count" id="countline">Loading…</div>
+    <button class="btn" id="openFilters" type="button">Filters</button>
+  </div>
+</div>
+
+<!-- filter sheet -->
+<div class="sheet" id="sheet" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Filters">
+    <div class="hd">
+      <div class="section-title">Filters</div>
+      <button class="btn" id="closeFilters" type="button">Close</button>
+    </div>
+    <div class="bd">
+
+      <label for="q">Search</label>
+      <input id="q" type="search" placeholder="Model name, keyword…" />
+
+      <div style="height:10px"></div>
+
+      <label>Access</label>
+      <div class="row2">
+        <button class="chip" data-access="all" aria-pressed="true" type="button">All</button>
+        <button class="chip" data-access="open" aria-pressed="false" type="button">Open weights</button>
+        <button class="chip" data-access="api" aria-pressed="false" type="button">API only</button>
+      </div>
+
+      <label>Modality</label>
+      <div class="row2" id="modalityChips"></div>
+
+      <label>Type</label>
+      <div class="row2" id="typeChips"></div>
+
+      <div style="height:12px"></div>
+
+      <div class="row2">
+        <button class="btn" id="reset" type="button">Reset</button>
+        <button class="btn" id="modelsOnly" type="button">Models only</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="events.2025.js"></script>
+<script>
+  let EVENTS = [];
+  // ======= Config =======
+  // These should match your tag universe (you can auto-derive later too)
+  const MODALITIES = ["text","vision","audio","multimodal"];
+  const TYPES = ["model","agent","tool","robot","research","benchmark","partnership"];
+
+  // Curated story chapters reference event IDs from JSON.
+  // Keep this in the HTML for now (or move to a separate story.json later).
+  const CHAPTERS = [
+    {
+      title:"Q1 — Reasoning goes mainstream",
+      summary:"A surge of reasoning-focused releases, with open weights becoming genuinely competitive for enthusiasts.",
+      highlights:[/* fill with real IDs from JSON */]
+    },
+    {
+      title:"Q2 — Multimodal becomes default",
+      summary:"More releases treat vision/audio as first-class, and tool/agent adjacency starts appearing everywhere.",
+      highlights:[]
+    }
+  ];
+
+  // ======= Theme toggle (light default + persist) =======
+  (function initTheme(){
+    const saved = localStorage.getItem("theme"); // "light" | "dark" | null
+    if (saved === "light" || saved === "dark") {
+      document.documentElement.setAttribute("data-theme", saved);
+      return;
+    }
+    // First visit: prefer light for print friendliness, but respect OS if dark
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+  })();
+
+  function toggleTheme(){
+    const cur = document.documentElement.getAttribute("data-theme") || "light";
+    const next = cur === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  }
+
+  // ======= State & data =======
+  const state = {
+    q:"",
+    access:"all",            // all | open | api
+    modalities:new Set(),    // empty = all
+    types:new Set()          // empty = all
+  };
+
+  const el = (id)=>document.getElementById(id);
+
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function monthLabel(m){
+    const [y,mm]=m.split("-");
+    return `${MONTHS[Number(mm)-1]} ${y}`;
+  }
+
+  function matchesFilters(e){
+    if (state.access !== "all" && e.access !== state.access) return false;
+
+    if (state.modalities.size){
+      let ok=false;
+      for (const m of (e.modalities||[])) if (state.modalities.has(m)) ok=true;
+      if (!ok) return false;
+    }
+
+    if (state.types.size){
+      let ok=false;
+      for (const t of (e.types||[])) if (state.types.has(t)) ok=true;
+      if (!ok) return false;
+    }
+
+    if (state.q.trim()){
+      const q = state.q.trim().toLowerCase();
+      const hay = ((e.name||"")+" "+(e.desc||"")+" "+(e.org||"")).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+
+    return true;
+  }
+
+  function filteredEvents(){
+    return EVENTS.filter(matchesFilters);
+  }
+
+  function groupByMonth(list){
+    const map = new Map();
+    for (const e of list){
+      if (!e.month) continue;
+      if (!map.has(e.month)) map.set(e.month, []);
+      map.get(e.month).push(e);
+    }
+    const months = Array.from(map.keys()).sort();
+    for (const m of months){
+      map.get(m).sort((a,b)=>{
+        // date may be null; month grouping is primary
+        const da = a.date || "";
+        const db = b.date || "";
+        return da.localeCompare(db) || (a.name||"").localeCompare(b.name||"");
+      });
+    }
+    return { months, map };
+  }
+
+  // ======= Render =======
+  function renderChips(containerId, values, kind){
+    const root = el(containerId);
+    root.innerHTML = "";
+    for (const v of values){
+      const b = document.createElement("button");
+      b.className="chip";
+      b.type="button";
+      b.textContent = v[0].toUpperCase()+v.slice(1);
+      b.setAttribute("aria-pressed","false");
+      b.addEventListener("click", ()=>{
+        const set = (kind==="modality") ? state.modalities : state.types;
+        if (set.has(v)) set.delete(v); else set.add(v);
+        b.setAttribute("aria-pressed", set.has(v) ? "true" : "false");
+        rerender();
+      });
+      root.appendChild(b);
+    }
+  }
+
+  function renderStory(){
+    const root = el("chapters");
+    root.innerHTML = "";
+    for (const ch of CHAPTERS){
+      const div = document.createElement("div");
+      div.className = "chapter";
+      div.innerHTML = `<h3>${ch.title}</h3><p>${ch.summary}</p>`;
+
+      const chips = document.createElement("div");
+      chips.className="chips";
+
+      for (const id of (ch.highlights||[])){
+        const ev = EVENTS.find(x=>x.id===id);
+        if (!ev) continue;
+        const c = document.createElement("a");
+        c.className="chip";
+        c.href = `#${ev.id}`;
+        c.textContent = ev.name;
+        chips.appendChild(c);
+      }
+
+      if (!chips.childNodes.length){
+        const empty = document.createElement("div");
+        empty.style.color = "var(--muted)";
+        empty.style.fontSize = "13px";
+        empty.textContent = "Add highlight IDs here to curate this chapter.";
+        div.appendChild(empty);
+      } else {
+        div.appendChild(chips);
+      }
+
+      const jump = document.createElement("a");
+      jump.className="jump";
+      jump.href="#explore";
+      jump.textContent="Go to Explore";
+      div.appendChild(jump);
+
+      root.appendChild(div);
+    }
+  }
+
+  function renderMonthStrip(list){
+    const { months, map } = groupByMonth(list);
+    const root = el("monthstrip");
+    root.innerHTML = "";
+    for (const m of months){
+      const items = map.get(m);
+      const open = items.filter(x=>x.access==="open").length;
+      const api  = items.filter(x=>x.access==="api").length;
+
+      const a = document.createElement("a");
+      a.className = "monthpill";
+      a.href = `#m-${m}`;
+      a.innerHTML = `
+        <div class="m">${monthLabel(m)}</div>
+        <div class="c">
+          <span class="dot open">${open}</span>
+          <span class="dot api">${api}</span>
+        </div>`;
+      root.appendChild(a);
+    }
+  }
+
+  function renderTimeline(list){
+    const { months, map } = groupByMonth(list);
+    const root = el("timeline");
+    root.innerHTML = "";
+
+    for (const m of months){
+      const monthDiv = document.createElement("div");
+      monthDiv.className = "month";
+      monthDiv.id = `m-${m}`;
+
+      const items = map.get(m);
+      const open = items.filter(x=>x.access==="open").length;
+      const api  = items.filter(x=>x.access==="api").length;
+
+      const mh = document.createElement("div");
+      mh.className = "month-header";
+      mh.innerHTML = `
+        <div class="left">
+          <div class="title">${monthLabel(m)}</div>
+          <div class="meta">${items.length} entries · <span style="color:var(--open)">${open} open</span> · <span style="color:var(--api)">${api} api</span></div>
+        </div>
+        <a class="badge" href="#overview" style="color:var(--muted)">Back to overview</a>
+      `;
+      monthDiv.appendChild(mh);
+
+      const cards = document.createElement("div");
+      cards.className = "cards";
+
+      for (const e of items){
+        const card = document.createElement("div");
+        card.className = "card";
+        card.id = e.id;
+        card.tabIndex = 0;
+        card.setAttribute("aria-expanded","false");
+
+        const badge = e.access==="open"
+          ? `<span class="badge open">Open weights</span>`
+          : e.access==="api"
+            ? `<span class="badge api">API</span>`
+            : `<span class="badge">Unknown</span>`;
+
+        const metas = [
+          ...(e.modalities||[]).map(m=>`<span class="mini">${m}</span>`),
+          ...(e.types||[]).map(t=>`<span class="mini">${t}</span>`)
+        ].join("");
+
+        const links = [];
+        const hf = e.links?.hf;
+        const other = e.links?.other || [];
+        if (hf) links.push(`<a href="${hf}" target="_blank" rel="noopener">Hugging Face</a>`);
+        for (const u of other.slice(0, 3)) {
+          links.push(`<a href="${u}" target="_blank" rel="noopener">Link</a>`);
+        }
+        links.push(`<a href="#${e.id}" title="Permalink">Permalink</a>`);
+
+        const dateLabel = e.date ? `<span class="mini">${e.date}</span>` : "";
+
+        card.innerHTML = `
+          <div class="row">
+            <h4>${e.name || "Untitled"}</h4>
+            <div style="display:flex; gap:6px; align-items:center">${badge}</div>
+          </div>
+          <div class="desc">${e.desc || ""}</div>
+          <div class="meta-chips">${dateLabel}${metas}</div>
+          <div class="links">${links.join("")}</div>
+        `;
+
+        const toggle = () => {
+          const open = card.getAttribute("aria-expanded")==="true";
+          card.setAttribute("aria-expanded", open ? "false" : "true");
+        };
+
+        card.addEventListener("click", toggle);
+        card.addEventListener("keydown", (ev)=>{
+          if (ev.key==="Enter" || ev.key===" "){ ev.preventDefault(); toggle(); }
+        });
+
+        cards.appendChild(card);
+      }
+
+      monthDiv.appendChild(cards);
+      root.appendChild(monthDiv);
+    }
+  }
+
+  function updateStats(list){
+    const total = EVENTS.length;
+    const vis = list.length;
+    const open = list.filter(x=>x.access==="open").length;
+    const api  = list.filter(x=>x.access==="api").length;
+
+    el("countline").innerHTML = `${vis} shown · <span style="color:var(--open)">${open} open</span> · <span style="color:var(--api)">${api} api</span> · ${total} total`;
+    el("visibleStats").textContent = `${vis} shown`;
+    el("overviewStats").textContent = `${open} open · ${api} api`;
+  }
+
+  function rerender(){
+    const list = filteredEvents();
+    updateStats(list);
+    renderMonthStrip(list);
+    renderTimeline(list);
+  }
+
+  // ======= UI actions =======
+  function setAccess(access){
+    state.access = access;
+    document.querySelectorAll('[data-access]').forEach(b=>{
+      b.setAttribute("aria-pressed", b.getAttribute("data-access")===access ? "true":"false");
+    });
+    rerender();
+  }
+
+  function resetFilters(){
+    state.q = "";
+    state.access = "all";
+    state.modalities.clear();
+    state.types.clear();
+
+    el("q").value = "";
+    setAccess("all");
+
+    document.querySelectorAll('#modalityChips .chip, #typeChips .chip').forEach(b=>{
+      b.setAttribute("aria-pressed","false");
+    });
+
+    rerender();
+  }
+
+  function modelsOnly(){
+    state.types = new Set(["model"]);
+    document.querySelectorAll('#typeChips .chip').forEach(b=>{
+      b.setAttribute("aria-pressed", b.textContent.toLowerCase()==="model" ? "true":"false");
+    });
+    rerender();
+  }
+
+  function openSheet(open){
+    const sheet = el("sheet");
+    sheet.setAttribute("aria-hidden", open ? "false":"true");
+    if (open) el("q").focus();
+  }
+
+  // ======= init =======
+  document.addEventListener("DOMContentLoaded", ()=>{
+    // theme
+    el("themeToggle").addEventListener("click", toggleTheme);
+
+    // chips
+    renderChips("modalityChips", MODALITIES, "modality");
+    renderChips("typeChips", TYPES, "type");
+
+    // access buttons
+    document.querySelectorAll('[data-access]').forEach(b=>{
+      b.addEventListener("click", ()=> setAccess(b.getAttribute("data-access")));
+    });
+
+    // search
+    el("q").addEventListener("input", (e)=>{ state.q = e.target.value; rerender(); });
+
+    // sheet controls
+    el("openFilters").addEventListener("click", ()=> openSheet(true));
+    el("closeFilters").addEventListener("click", ()=> openSheet(false));
+    el("sheet").addEventListener("click", (e)=>{ if (e.target.id==="sheet") openSheet(false); });
+
+    // quick actions
+    el("reset").addEventListener("click", resetFilters);
+    el("modelsOnly").addEventListener("click", modelsOnly);
+
+    const data = window.DATA;
+    if (!data || !Array.isArray(data.events)) {
+      const box = el("loadError");
+      box.style.display = "block";
+      box.textContent = "Could not load events. Make sure events.2025.js is present.";
+      return;
+    }
+    EVENTS = data.events;
+    renderStory();
+    rerender();
+  });
+</script>
+</body>
+</html>

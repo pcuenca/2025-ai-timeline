@@ -256,14 +256,9 @@
         <option value="multimodal">Multimodal</option>
       </select>
       <select id="typeFilter" onchange="filterByType(this.value)">
-        <option value="all">All Types</option>
+        <option value="all">All Releases</option>
         <option value="model">Models</option>
-        <option value="agent">Agents</option>
-        <option value="tool">Tools</option>
-        <option value="robot">Robots</option>
-        <option value="research">Research</option>
-        <option value="benchmark">Benchmarks</option>
-        <option value="partnership">Partnerships</option>
+        <option value="other">Ecosystem</option>
       </select>
     </div>
   </div>
@@ -274,6 +269,10 @@
     <span class="counter-divider">·</span>
     <span class="counter-item">
       <span id="api-only-count">0</span> API Only
+    </span>
+    <span class="counter-divider">·</span>
+    <span class="counter-item">
+      <span id="ecosystem-count">0</span> Ecosystem
     </span>
   </div>
   <div class="timeline">
@@ -1080,11 +1079,15 @@
   </div>
   <script>
     function updateCounts() {
-      const openSourceCount = document.querySelectorAll('.tag.open-source').length;
-      const apiOnlyCount = document.querySelectorAll('.tag.api-only').length;
+      const openSourceCount = document.querySelectorAll('.event .tag.open-source').length;
+      const apiOnlyCount = document.querySelectorAll('.event .tag.api-only').length;
+      const ecosystemCount = Array.from(document.querySelectorAll('.event')).filter(event =>
+        !event.querySelector('.tag.model')
+      ).length;
       
       document.getElementById('open-source-count').textContent = openSourceCount;
       document.getElementById('api-only-count').textContent = apiOnlyCount;
+      document.getElementById('ecosystem-count').textContent = ecosystemCount;
     }
 
     let currentFilters = {
@@ -1126,7 +1129,9 @@
         const matchesModality = currentFilters.modality === 'all' || 
           event.querySelector(`.tag.${currentFilters.modality}`);
         const matchesType = currentFilters.type === 'all' || 
-          event.querySelector(`.tag.${currentFilters.type}`);
+          (currentFilters.type === 'model'
+            ? event.querySelector('.tag.model')
+            : !event.querySelector('.tag.model'));
 
         event.style.display = (matchesCategory && matchesModality && matchesType) ? 'block' : 'none';
       });

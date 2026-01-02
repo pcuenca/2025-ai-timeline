@@ -418,9 +418,9 @@
         </div>
       </div>
       <nav class="nav" aria-label="Sections">
-        <a href="#story">Story</a>
+        <a href="#story">Summary</a>
         <a href="#overview">Overview</a>
-        <a href="#explore">Explore</a>
+        <a href="#explore">Releases</a>
         <button class="search-button" id="openSearch" type="button" aria-label="Search">🔎</button>
         <button id="themeToggle" type="button" aria-label="Toggle theme">☀︎ / ☾</button>
       </nav>
@@ -453,7 +453,7 @@
 <div class="wrap">
   <section id="story" class="panel">
     <div class="hd">
-      <div class="section-title">Story</div>
+      <div class="section-title">Summary</div>
       <div class="badge" id="storyNote">Curated highlights → jump into data</div>
     </div>
     <div class="bd">
@@ -478,7 +478,7 @@
 
   <section id="explore" class="panel">
     <div class="hd">
-      <div class="section-title">Explore</div>
+      <div class="section-title">Releases</div>
       <div class="badge" id="visibleStats">—</div>
     </div>
     <div class="bd" id="timeline"></div>
@@ -517,14 +517,28 @@
   // Keep this in the HTML for now (or move to a separate story.json later).
   const CHAPTERS = [
     {
-      title:"Q1 — Reasoning goes mainstream",
-      summary:"A surge of reasoning-focused releases, with open weights becoming genuinely competitive for enthusiasts.",
-      highlights:[/* fill with real IDs from JSON */]
+      title:"Q1 — Learning to Reason",
+      summary:"Deepseek not only releases a top-notch reasoning model, but shows how to train them and compete with closed frontier models. OpenAI debuts Deep Research.",
+      highlights:["deepseek-r1-r1-zero","qwen2-5-vl-series","openai-deep-research","gemini-2-5-pro-experimental"],
+      jump:"m-2025-01"
     },
     {
-      title:"Q2 — Multimodal becomes default",
-      summary:"More releases treat vision/audio as first-class, and tool/agent adjacency starts appearing everywhere.",
-      highlights:[]
+      title:"Q2 — Multimodality and Coding",
+      summary:"More LLMs become multimodal by default, and there's a surge in coding agents. Strong vision, audio, and generative models emerge.",
+      highlights:["llama-4","qwen-3-series","imagen-4","openai-codex-agent","google-jules","claude-4-family"],
+      jump:"m-2025-04"
+    },
+    {
+      title:"Q3 — <i>Gold</i> rush, OpenAI opens up, the community goes bananas",
+      summary:"Flagship models get gold in Math olympiads and hard benchmarks. OpenAI releases strong open source models and Google releases the much anticipated nano-banana for image generation and editing. Agentic workflows become commonplace.",
+      highlights:["gemini-deep-think-imo-gold","openai-imo-gold-model","grok-4","gpt-oss-120b","gemini-2-5-flash-image","claude-sonnet-4-5"],
+      jump:"m-2025-07"
+    },
+    {
+      title:"Q4 — Mistral returns, leaderboard hill-climbing",
+      summary:"Mistral is back with updated model families. All labs release impressive models to wrap up the year!",
+      highlights:["claude-opus-4-5","deepseekmath-v2","flux-2","gpt-5-1","kimi-k2-thinking","nano-banana-pro","glm-4-7","gemini-3-0","mistral-3-large","minimax-m2-1"],
+      jump:"m-2025-10"
     }
   ];
 
@@ -642,8 +656,8 @@
 
       const jump = document.createElement("a");
       jump.className="jump";
-      jump.href="#explore";
-      jump.textContent="Go to Explore";
+      jump.href = `#${ch.jump || "explore"}`;
+      jump.textContent="Releases";
       div.appendChild(jump);
 
       root.appendChild(div);

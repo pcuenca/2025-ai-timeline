@@ -455,7 +455,7 @@ window.DATA = {
       "desc": "Open Llama 4 family with a 10M context window.",
       "access": "open",
       "modalities": [
-        "text"
+        "multimodal"
       ],
       "types": [
         "model"

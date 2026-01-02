@@ -231,8 +231,9 @@
       gap:12px;
       padding: 10px 12px;
       border-radius: 14px;
-      background: color-mix(in srgb, var(--bg2) 85%, transparent);
-      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--accent) 10%, var(--bg2));
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+      box-shadow: 0 4px 12px rgba(0,0,0,.06);
       backdrop-filter: blur(10px);
     }
     .month-header .left{ display:flex; flex-direction:column; gap:3px; }
@@ -401,6 +402,12 @@
       font-size: 13px;
       line-height: 1.35;
     }
+    .credits{
+      text-align:center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 16px 16px 80px;
+    }
 
     @media (min-width: 860px){
       h1{ font-size: 24px; }
@@ -502,8 +509,11 @@
 <!-- sticky mobile bar -->
 <div class="filterbar" role="region" aria-label="Filters summary">
   <div class="inner">
-    <div class="count" id="countline">Loading…</div>
-    <button class="btn" id="reset" type="button">Reset</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="count" id="countline">Loading…</div>
+      <button class="btn" id="reset" type="button">Reset</button>
+    </div>
+    <div class="credits" style="padding: 0;">Data from <a href="https://nhlocal.github.io/AiTimeline">NHLOCAL</a> · Original concept, recipe and code by <a href="https://x.com/reach_vb">vb</a></div>
   </div>
 </div>
 

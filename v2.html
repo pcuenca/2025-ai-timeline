@@ -245,6 +245,7 @@
       background: color-mix(in srgb, var(--bg2) 72%, transparent);
       padding: 12px;
       cursor: default;
+      scroll-margin-top: 120px;
     }
     .card:focus{ outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
     .card .row{
@@ -280,6 +281,11 @@
       border: 1px solid var(--border);
       background: color-mix(in srgb, var(--bg2) 70%, transparent);
       color: var(--text);
+    }
+    .meta-sep{
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 2px;
     }
     /* sticky bottom filters (mobile-first) */
     .filterbar{
@@ -728,6 +734,7 @@
           <div class="desc">${e.desc || ""}</div>
           <div class="meta-chips">
             ${dateLabel}${metas}
+            <span class="meta-sep">•</span>
             <span class="links">${links.join("")}</span>
           </div>
         `;

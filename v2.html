@@ -248,6 +248,18 @@
       cursor: default;
       scroll-margin-top: 135px;
     }
+    .card.is-open{
+      border-color: color-mix(in srgb, var(--open) 30%, var(--border));
+      background: color-mix(in srgb, var(--open) 6%, var(--bg2));
+    }
+    .card.is-api{
+      border-color: color-mix(in srgb, var(--api) 30%, var(--border));
+      background: color-mix(in srgb, var(--api) 6%, var(--bg2));
+    }
+    .card.is-eco{
+      border-color: color-mix(in srgb, var(--muted) 30%, var(--border));
+      background: color-mix(in srgb, var(--muted) 4%, var(--bg2));
+    }
     .card:focus{ outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; }
     .card .row{
       display:flex;
@@ -724,6 +736,12 @@
         card.className = "card";
         card.id = e.id;
         const isModel = (e.types || []).includes("model");
+        if (isModel) {
+          if (e.access === "open") card.classList.add("is-open");
+          else if (e.access === "api") card.classList.add("is-api");
+        } else {
+          card.classList.add("is-eco");
+        }
         const badge = isModel
           ? (e.access==="open"
               ? (e.links?.hf ? `<a class="badge open" href="${e.links.hf}" target="_blank" rel="noopener">Open weights</a>` : `<span class="badge open">Open weights</span>`)

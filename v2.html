@@ -81,6 +81,7 @@
       justify-content:space-between;
       gap:12px;
       padding-top: 10px;
+      flex-wrap: wrap;
     }
     h1{ margin:0; font-size: 20px; letter-spacing: .2px; }
     .sub{ margin-top:6px; color:var(--muted); font-size: 13px; line-height:1.35; max-width: 62ch; }
@@ -100,6 +101,19 @@
       background: color-mix(in srgb, var(--bg2) 70%, transparent);
       color: var(--text);
       cursor:pointer;
+    }
+    .search-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 70%, transparent);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 14px;
     }
 
     .panel{
@@ -130,21 +144,6 @@
     }
 
     .chips{ display:flex; flex-wrap:wrap; gap:8px; }
-    .chip{
-      display:inline-flex;
-      gap:6px;
-      align-items:center;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--chip);
-      border: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--text);
-      user-select:none;
-      cursor: pointer;
-    }
-    .chip[aria-pressed="true"]{ background: var(--chip2); border-color: color-mix(in srgb, var(--border) 75%, var(--text)); }
-
     .badge{
       display:inline-flex;
       padding: 3px 8px;
@@ -355,6 +354,28 @@
       font-size: 14px;
     }
     label{ font-size: 12px; color: var(--muted); display:block; margin: 10px 0 6px; }
+    .filters-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      margin-top: 10px;
+    }
+    .filters-row label{
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .filters-row select{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg2) 85%, transparent);
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+    }
 
     .error{
       margin-top: 12px;
@@ -401,14 +422,36 @@
         <a href="#story">Story</a>
         <a href="#overview">Overview</a>
         <a href="#explore">Explore</a>
+        <button class="search-button" id="openSearch" type="button" aria-label="Search">🔎</button>
         <button id="themeToggle" type="button" aria-label="Toggle theme">☀︎ / ☾</button>
       </nav>
+    </div>
+    <div class="filters-row" aria-label="Filters">
+      <label for="accessFilter">Access</label>
+      <select id="accessFilter">
+        <option value="all">All</option>
+        <option value="open">Open weights</option>
+        <option value="api">API only</option>
+      </select>
+      <label for="modalityFilter">Modality</label>
+      <select id="modalityFilter">
+        <option value="all">All</option>
+        <option value="text">Text</option>
+        <option value="vision">Vision</option>
+        <option value="audio">Audio</option>
+        <option value="multimodal">Multimodal</option>
+      </select>
+      <label for="categoryFilter">Category</label>
+      <select id="categoryFilter">
+        <option value="all">All</option>
+        <option value="model">Model</option>
+        <option value="other">Other</option>
+      </select>
     </div>
   </div>
 </header>
 
 <div class="wrap">
-
   <section id="story" class="panel">
     <div class="hd">
       <div class="section-title">Story</div>
@@ -447,43 +490,20 @@
 <div class="filterbar" role="region" aria-label="Filters summary">
   <div class="inner">
     <div class="count" id="countline">Loading…</div>
-    <button class="btn" id="openFilters" type="button">Filters</button>
+    <button class="btn" id="reset" type="button">Reset</button>
   </div>
 </div>
 
-<!-- filter sheet -->
+<!-- search sheet -->
 <div class="sheet" id="sheet" aria-hidden="true">
-  <div class="panel" role="dialog" aria-modal="true" aria-label="Filters">
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Search">
     <div class="hd">
-      <div class="section-title">Filters</div>
-      <button class="btn" id="closeFilters" type="button">Close</button>
+      <div class="section-title">Search</div>
+      <button class="btn" id="closeSearch" type="button">Close</button>
     </div>
     <div class="bd">
-
       <label for="q">Search</label>
       <input id="q" type="search" placeholder="Model name, keyword…" />
-
-      <div style="height:10px"></div>
-
-      <label>Access</label>
-      <div class="row2">
-        <button class="chip" data-access="all" aria-pressed="true" type="button">All</button>
-        <button class="chip" data-access="open" aria-pressed="false" type="button">Open weights</button>
-        <button class="chip" data-access="api" aria-pressed="false" type="button">API only</button>
-      </div>
-
-      <label>Modality</label>
-      <div class="row2" id="modalityChips"></div>
-
-      <label>Type</label>
-      <div class="row2" id="typeChips"></div>
-
-      <div style="height:12px"></div>
-
-      <div class="row2">
-        <button class="btn" id="reset" type="button">Reset</button>
-        <button class="btn" id="modelsOnly" type="button">Models only</button>
-      </div>
     </div>
   </div>
 </div>
@@ -494,8 +514,6 @@
   // ======= Config =======
   // These should match your tag universe (you can auto-derive later too)
   const MODALITIES = ["text","vision","audio","multimodal"];
-  const TYPES = ["model","agent","tool","robot","research","benchmark","partnership"];
-
   // Curated story chapters reference event IDs from JSON.
   // Keep this in the HTML for now (or move to a separate story.json later).
   const CHAPTERS = [
@@ -534,8 +552,8 @@
   const state = {
     q:"",
     access:"all",            // all | open | api
-    modalities:new Set(),    // empty = all
-    types:new Set()          // empty = all
+    modality:"all",          // all | text | vision | audio | multimodal
+    category:"all"           // all | model | other
   };
 
   const el = (id)=>document.getElementById(id);
@@ -549,16 +567,14 @@
   function matchesFilters(e){
     if (state.access !== "all" && e.access !== state.access) return false;
 
-    if (state.modalities.size){
-      let ok=false;
-      for (const m of (e.modalities||[])) if (state.modalities.has(m)) ok=true;
-      if (!ok) return false;
+    if (state.modality !== "all"){
+      if (!(e.modalities || []).includes(state.modality)) return false;
     }
 
-    if (state.types.size){
-      let ok=false;
-      for (const t of (e.types||[])) if (state.types.has(t)) ok=true;
-      if (!ok) return false;
+    if (state.category === "model"){
+      if (!(e.types || []).includes("model")) return false;
+    } else if (state.category === "other"){
+      if ((e.types || []).includes("model")) return false;
     }
 
     if (state.q.trim()){
@@ -594,25 +610,6 @@
   }
 
   // ======= Render =======
-  function renderChips(containerId, values, kind){
-    const root = el(containerId);
-    root.innerHTML = "";
-    for (const v of values){
-      const b = document.createElement("button");
-      b.className="chip";
-      b.type="button";
-      b.textContent = v[0].toUpperCase()+v.slice(1);
-      b.setAttribute("aria-pressed","false");
-      b.addEventListener("click", ()=>{
-        const set = (kind==="modality") ? state.modalities : state.types;
-        if (set.has(v)) set.delete(v); else set.add(v);
-        b.setAttribute("aria-pressed", set.has(v) ? "true" : "false");
-        rerender();
-      });
-      root.appendChild(b);
-    }
-  }
-
   function renderStory(){
     const root = el("chapters");
     root.innerHTML = "";
@@ -772,34 +769,31 @@
   // ======= UI actions =======
   function setAccess(access){
     state.access = access;
-    document.querySelectorAll('[data-access]').forEach(b=>{
-      b.setAttribute("aria-pressed", b.getAttribute("data-access")===access ? "true":"false");
-    });
+    rerender();
+  }
+
+  function setCategory(category){
+    state.category = category;
     rerender();
   }
 
   function resetFilters(){
     state.q = "";
     state.access = "all";
-    state.modalities.clear();
-    state.types.clear();
+    state.modality = "all";
+    state.category = "all";
 
     el("q").value = "";
-    setAccess("all");
-
-    document.querySelectorAll('#modalityChips .chip, #typeChips .chip').forEach(b=>{
-      b.setAttribute("aria-pressed","false");
-    });
+    el("accessFilter").value = "all";
+    el("modalityFilter").value = "all";
+    el("categoryFilter").value = "all";
 
     rerender();
   }
 
   function modelsOnly(){
-    state.types = new Set(["model"]);
-    document.querySelectorAll('#typeChips .chip').forEach(b=>{
-      b.setAttribute("aria-pressed", b.textContent.toLowerCase()==="model" ? "true":"false");
-    });
-    rerender();
+    setCategory("model");
+    el("categoryFilter").value = "model";
   }
 
   function openSheet(open){
@@ -813,26 +807,24 @@
     // theme
     el("themeToggle").addEventListener("click", toggleTheme);
 
-    // chips
-    renderChips("modalityChips", MODALITIES, "modality");
-    renderChips("typeChips", TYPES, "type");
-
-    // access buttons
-    document.querySelectorAll('[data-access]').forEach(b=>{
-      b.addEventListener("click", ()=> setAccess(b.getAttribute("data-access")));
+    el("accessFilter").addEventListener("change", (e)=> setAccess(e.target.value));
+    el("modalityFilter").addEventListener("change", (e)=>{
+      state.modality = e.target.value;
+      rerender();
     });
+    el("categoryFilter").addEventListener("change", (e)=> setCategory(e.target.value));
 
     // search
     el("q").addEventListener("input", (e)=>{ state.q = e.target.value; rerender(); });
-
-    // sheet controls
-    el("openFilters").addEventListener("click", ()=> openSheet(true));
-    el("closeFilters").addEventListener("click", ()=> openSheet(false));
-    el("sheet").addEventListener("click", (e)=>{ if (e.target.id==="sheet") openSheet(false); });
+    el("q").addEventListener("keydown", (e)=>{
+      if (e.key === "Enter") openSheet(false);
+    });
 
     // quick actions
     el("reset").addEventListener("click", resetFilters);
-    el("modelsOnly").addEventListener("click", modelsOnly);
+    el("openSearch").addEventListener("click", ()=> openSheet(true));
+    el("closeSearch").addEventListener("click", ()=> openSheet(false));
+    el("sheet").addEventListener("click", (e)=>{ if (e.target.id==="sheet") openSheet(false); });
 
     const data = window.DATA;
     if (!data || !Array.isArray(data.events)) {

@@ -156,6 +156,7 @@
     }
     .badge.open{ color: var(--open); border-color: color-mix(in srgb, var(--open) 35%, var(--border)); }
     .badge.api{ color: var(--api); border-color: color-mix(in srgb, var(--api) 35%, var(--border)); }
+    .badge.eco{ color: var(--muted); border-color: color-mix(in srgb, var(--muted) 35%, var(--border)); }
 
     .grid{
       display:grid;
@@ -216,6 +217,7 @@
     }
     .dot.open::before{ background: var(--open); }
     .dot.api::before{ background: var(--api); }
+    .dot.eco::before{ background: var(--muted); }
 
     /* explore timeline */
     .month{ margin-top: 18px; scroll-margin-top: 135px; }
@@ -670,8 +672,9 @@
     root.innerHTML = "";
     for (const m of months){
       const items = map.get(m);
-      const open = items.filter(x=>x.access==="open").length;
-      const api  = items.filter(x=>x.access==="api").length;
+      const open = items.filter(x=>x.access==="open" && (x.types||[]).includes("model")).length;
+      const api  = items.filter(x=>x.access==="api" && (x.types||[]).includes("model")).length;
+      const eco  = items.filter(x=>!(x.types||[]).includes("model")).length;
 
       const a = document.createElement("a");
       a.className = "monthpill";
@@ -681,6 +684,7 @@
         <div class="c">
           <span class="dot open">${open}</span>
           <span class="dot api">${api}</span>
+          <span class="dot eco">${eco}</span>
         </div>`;
       root.appendChild(a);
     }
@@ -697,15 +701,16 @@
       monthDiv.id = `m-${m}`;
 
       const items = map.get(m);
-      const open = items.filter(x=>x.access==="open").length;
-      const api  = items.filter(x=>x.access==="api").length;
+      const open = items.filter(x=>x.access==="open" && (x.types||[]).includes("model")).length;
+      const api  = items.filter(x=>x.access==="api" && (x.types||[]).includes("model")).length;
+      const eco  = items.filter(x=>!(x.types||[]).includes("model")).length;
 
       const mh = document.createElement("div");
       mh.className = "month-header";
       mh.innerHTML = `
         <div class="left">
           <div class="title">${monthLabel(m)}</div>
-          <div class="meta">${items.length} entries · <span style="color:var(--open)">${open} open</span> · <span style="color:var(--api)">${api} api</span></div>
+          <div class="meta">${items.length} entries · <span style="color:var(--open)">${open} open</span> · <span style="color:var(--api)">${api} api</span> · <span style="color:var(--muted)">${eco} ecosystem</span></div>
         </div>
         <a class="badge" href="#overview" style="color:var(--muted)">Back to overview</a>
       `;
@@ -718,11 +723,14 @@
         const card = document.createElement("div");
         card.className = "card";
         card.id = e.id;
-        const badge = e.access==="open"
-          ? (e.links?.hf ? `<a class="badge open" href="${e.links.hf}" target="_blank" rel="noopener">Open weights</a>` : `<span class="badge open">Open weights</span>`)
-          : e.access==="api"
-            ? `<span class="badge api">API</span>`
-            : `<span class="badge">Unknown</span>`;
+        const isModel = (e.types || []).includes("model");
+        const badge = isModel
+          ? (e.access==="open"
+              ? (e.links?.hf ? `<a class="badge open" href="${e.links.hf}" target="_blank" rel="noopener">Open weights</a>` : `<span class="badge open">Open weights</span>`)
+              : e.access==="api"
+                ? `<span class="badge api">API</span>`
+                : `<span class="badge">Unknown</span>`)
+          : `<span class="badge eco">Ecosystem</span>`;
 
         const metas = [
           ...(e.modalities||[]).map(m=>`<span class="mini">${m}</span>`),
@@ -764,12 +772,13 @@
   function updateStats(list){
     const total = EVENTS.length;
     const vis = list.length;
-    const open = list.filter(x=>x.access==="open").length;
-    const api  = list.filter(x=>x.access==="api").length;
+    const open = list.filter(x=>x.access==="open" && (x.types||[]).includes("model")).length;
+    const api  = list.filter(x=>x.access==="api" && (x.types||[]).includes("model")).length;
+    const eco  = list.filter(x=>!(x.types||[]).includes("model")).length;
 
-    el("countline").innerHTML = `${vis} shown · <span style="color:var(--open)">${open} open</span> · <span style="color:var(--api)">${api} api</span> · ${total} total`;
+    el("countline").innerHTML = `${vis} shown · <span style="color:var(--open)">${open} open</span> · <span style="color:var(--api)">${api} api</span> · <span style="color:var(--muted)">${eco} ecosystem</span> · ${total} total`;
     el("visibleStats").textContent = `${vis} shown`;
-    el("overviewStats").textContent = `${open} open · ${api} api`;
+    el("overviewStats").textContent = `${open} open · ${api} api · ${eco} ecosystem`;
   }
 
   function rerender(){
